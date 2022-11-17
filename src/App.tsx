@@ -1,3 +1,4 @@
+import Calculator from './components/Calculator'
 import Header from './components/Header'
 import { GlobalStyles } from './styles/GlobalStyles'
 
@@ -6,7 +7,7 @@ function App() {
     <>
     <GlobalStyles />
     <Header />
-    <h1> Hello World </h1>
+    <Calculator />
     </>
   )
 }
