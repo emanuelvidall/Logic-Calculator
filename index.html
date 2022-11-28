@@ -1,13 +1,237 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Lógica ⌨</title>
+</head>
+<body>
+<h1> Calculadora Lógica</h1>
+<input placeholder="digite a proposição lógica" id="proposicao">
+<button onclick="botao()">console.log</button>
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 20px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 20px;word-break:normal;}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+</style>
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 20px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 20px;word-break:normal;}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+</style>
+
+<table class="tg" style="margin-top: 2vh;">
+<thead>
+  <tr id="cabeca">
+    <th>A</th>
+    <th>B</th>
+    <th>C</th>
+    <th>D</th>
+    <th>RESULTADO</th>
+  </tr>
+</thead>
+<tbody>
+    <tr id="corpo">
+        <td id="A"></td>
+        <td id="B"></td>
+        <td id="C"></td>
+        <td id="D"></td>
+        <td id="resultado"></td>
+    </tr>
+</tbody>
+</table>
+
+<script>
+var proposicao = document.getElementById("proposicao");
+var arrayInput = [];
+var validCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz()~^<>";
+var cabeca = document.getElementById("cabeca");
+var corpo = document.getElementById("corpo");
+var A = document.getElementById("A");
+var B = document.getElementById("B");
+var C = document.getElementById("C");
+var D = document.getElementById("D");
+var Resultado = document.getElementById("resultado");
+var operators = ['~', '^', '>', 'v', '<>', '(', ')'];
+var conectivos = ['^', '>', 'v', '<>'];
+var termos = ['ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'];
+var array1 = [1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0];
+var array2 = [1,1,1,1,0,0,0,0,1,1,1,1,0,0,0,0];
+var array3 = [1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0];
+var array4 = [1,0,1,0,1,1,0,1,0,1,0,1,0,1,0,1];
+var newArrayA = [];
+var newArrayB = [];
+var newArrayC = [];
+var newArrayD = [];
+var resultArray = [];
+
+function createArray(s){
+    for (var i = 0; i < s.length; i++){
+        arrayInput.push(s[i]);
+    }
+    console.log(arrayInput)
+    return arrayInput;
+}
+
+function arrayValidation(){
+    for (var i = 0; i < arrayInput.length; i++){
+        console.log(validCharacters.indexOf(arrayInput[i]))
+        if (validCharacters.indexOf(arrayInput[i]) == -1){
+            console.log('Character not valid ❌: ' + "'" + arrayInput[i] + "'");
+            alert("Existem caracteres inválidos na proposição lógica, por favor verifique e tente novamente.");
+            return false;
+        }else{
+            console.log('Character is valid ✅: ' + "'" + arrayInput[i] + "'");
+        }
+    }
+}
+
+function wffValidation(){
+    console.log("Invalid WFF ❌: " + operators.indexOf(arrayInput[3]));
+    for (let i = 0; i < arrayInput.length; i++){
+        if (arrayInput[i] == "("){
+            if (operators.indexOf(arrayInput[i+1]) != -1){
+                console.log("Proposição lógica inválida, por favor verifique e tente novamente.");
+                alert("Proposição lógica inválida, por favor verifique e tente novamente.");
+                return false;
+            }
+        if (arrayInput[i] == ")"){
+            if (operators.indexOf(arrayInput[i+1]) != -1){
+                console.log("Proposição lógica inválida, por favor verifique e tente novamente.");
+                alert("Proposição lógica inválida, por favor verifique e tente novamente.");
+                return false;
+                }
+            }
+        }
+    }
+}
+
+function usinArray(){
+    createArray(proposicao.value);
+    arrayValidation(arrayInput);
+    console.log(arrayInput.length)
+    wffValidation(arrayInput);
+
+    A.innerHTML = '';
+    B.innerHTML = '';
+    C.innerHTML = '';
+    D.innerHTML = '';
+    
+    if (arrayInput.length == 1){
+        for (let i = 0; i < 2; i++){
+            A.innerHTML += `<tr>${array4[i]}</tr><br>`;
+            newArrayA.push(array4[i]);
+        }
+    }else if(arrayInput.length == 2){
+        for (let i = 0; i < 4; i++){
+            A.innerHTML += `<tr>${array3[i]}</tr><br>`;
+            newArrayA.push(array3[i]);
+        }
+        for (let i = 0; i < 4; i++){
+            B.innerHTML += `<tr>${array4[i]}</tr><br>`;
+            newArrayB.push(array4[i]);
+        }
+    }else if(arrayInput.length == 3){
+        for (let i = 0; i < 8; i++){
+            A.innerHTML += `<tr>${array2[i]}</tr><br>`;
+            newArrayA.push(array2[i]);
+        }
+        for (let i = 0; i < 8; i++){
+            B.innerHTML += `<tr>${array3[i]}</tr><br>`;
+            newArrayB.push(array3[i]);
+        }
+        for (let i = 0; i < 8; i++){
+            C.innerHTML += `<tr>${array4[i]}</tr><br>`;
+            newArrayC.push(array4[i]);
+        }
+    }else if(arrayInput.length == 4){
+        for (let i = 0; i < 16; i++){
+            A.innerHTML += `<tr>${array1[i]}</tr><br>`;
+            newArrayA.push(array1[i]);
+        }
+        for (let i = 0; i < 16; i++){
+            B.innerHTML += `<tr>${array2[i]}</tr><br>`;
+            newArrayB.push(array2[i]);
+        }
+        for (let i = 0; i < 16; i++){
+            C.innerHTML += `<tr>${array3[i]}</tr><br>`;
+            newArrayC.push(array3[i]);
+        }
+        for (let i = 0; i < 16; i++){
+            D.innerHTML += `<tr>${array4[i]}</tr><br>`;
+            newArrayD.push(array4[i]);
+        }
+    }
+    console.log(newArrayA, newArrayB, newArrayC, newArrayD);
+}
+
+
+function calculateLogic(){
+    for (let i = 0; i < arrayInput.length; i++){
+        if (arrayInput[i] == 'v'){
+            for (let j = 0; j < newArrayA.length; j++){
+                if (newArrayA[j] == 1 || newArrayB[j] == 1){
+                    console.log(199999);
+                    resultArray.push(1);
+                    Resultado.innerHTML += `<tr>${resultArray[j]}</tr><br>`;
+                }else{
+                    resultArray.push(0);
+                    Resultado.innerHTML += `<tr>${resultArray[j]}</tr><br>`;
+                }
+            }
+        }else if (arrayInput[i] == '^'){
+            for (let j = 0; j < newArrayA.length; j++){
+                if (newArrayA[j] == 1 && newArrayB[j] == 1){
+                    resultArray.push(1);
+                }else{
+                    resultArray.push(0);
+                }
+            }
+        }else if (arrayInput[i] == '>'){
+            for (let j = 0; j < newArrayA.length; j++){
+                if (newArrayA[j] == 1 && newArrayB[j] == 0){
+                    resultArray.push(0);
+                }else{
+                    resultArray.push(1);
+                }
+            }
+        }else if (arrayInput[i] == '~'){
+            for (let j = 0; j < newArrayA.length; j++){
+                if (newArrayA[j] == 1){
+                    resultArray.push(0);
+                }else{
+                    resultArray.push(1);
+                }
+            }
+        }else if (arrayInput[i] == '<>'){
+            for (let j = 0; j < newArrayA.length; j++){
+                if (newArrayA[j] == newArrayB[j]){
+                    resultArray.push(1);
+                }else{
+                    resultArray.push(0);
+                }
+            }
+        }
+    }
+}
+
+
+
+function botao(){
+    usinArray();
+    calculateLogic();
+    console.log(arrayInput);
+    console.log(resultArray)
+}
+
+</script>
+
+</body>
 </html>
