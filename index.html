@@ -5,36 +5,47 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora Lógica ⌨</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <script src="https://kit.fontawesome.com/026e4f1f21.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<h1> Calculadora Lógica</h1>
-<input placeholder="digite a proposição lógica" id="proposicao">
-<button onclick="botao()">console.log</button>
+<div class="main-containerr">
+    <h1 class="title is-1"><i class="fa-solid fa-calculator"></i>Calculadora Lógica</h1>
+    <input class="input is-primary" type="text" placeholder="digite a proposição lógica" id="proposicao"><br>
+    <button class="button is-success" onclick="botao()">console.log</button>
+    <h3>Att. não usar a letrar 'v' como termo</h3>
+</div>
 <style type="text/css">
-.tg  {border-collapse:collapse;border-spacing:0;}
-.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-  overflow:hidden;padding:10px 20px;word-break:normal;}
-.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-  font-weight:normal;overflow:hidden;padding:10px 20px;word-break:normal;}
-.tg .tg-0lax{text-align:left;vertical-align:top}
-</style>
-<style type="text/css">
-.tg  {border-collapse:collapse;border-spacing:0;}
-.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-  overflow:hidden;padding:10px 20px;word-break:normal;}
-.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-  font-weight:normal;overflow:hidden;padding:10px 20px;word-break:normal;}
-.tg .tg-0lax{text-align:left;vertical-align:top}
+
+td{
+    border-color:black;
+    border-style:solid;
+    border-width:1px;
+    font-family:Arial, sans-serif;font-size:14px;
+    overflow:hidden;
+    padding:10px 20px;
+    word-break:normal;}
+th{
+    border-color:black;
+    border-style:solid;
+    border-width:1px;
+    font-family:Arial, sans-serif;font-size:14px;
+    font-weight:normal;
+    overflow:hidden;
+    padding:10px 20px;
+    word-break:normal;
+    }
 </style>
 
-<table class="tg" style="margin-top: 2vh;">
+<table class="tg table" style="margin-top: 2vh; margin-left: 2vw; margin-right: 2vw;">
 <thead>
   <tr id="cabeca">
     <th>A</th>
     <th>B</th>
     <th>C</th>
     <th>D</th>
-    <th>RESULTADO</th>
+    <th>RESULT</th>
   </tr>
 </thead>
 <tbody>
@@ -47,11 +58,10 @@
     </tr>
 </tbody>
 </table>
-
 <script>
 var proposicao = document.getElementById("proposicao");
 var arrayInput = [];
-var validCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz()~^<>";
+var validCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz()~^>↔";
 var cabeca = document.getElementById("cabeca");
 var corpo = document.getElementById("corpo");
 var A = document.getElementById("A");
@@ -59,9 +69,9 @@ var B = document.getElementById("B");
 var C = document.getElementById("C");
 var D = document.getElementById("D");
 var Resultado = document.getElementById("resultado");
-var operators = ['~', '^', '>', 'v', '<>', '(', ')'];
-var conectivos = ['^', '>', 'v', '<>'];
-var termos = ['ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'];
+var operators = ['~', '^', '>', 'v', '↔', '(', ')'];
+var conectivos = ['^', '>', 'v', '↔'];
+var termos = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuwxyz';
 var array1 = [1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0];
 var array2 = [1,1,1,1,0,0,0,0,1,1,1,1,0,0,0,0];
 var array3 = [1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0];
@@ -71,6 +81,7 @@ var newArrayB = [];
 var newArrayC = [];
 var newArrayD = [];
 var resultArray = [];
+var quantiTermos= 0;
 
 function createArray(s){
     for (var i = 0; i < s.length; i++){
@@ -123,13 +134,24 @@ function usinArray(){
     B.innerHTML = '';
     C.innerHTML = '';
     D.innerHTML = '';
-    
-    if (arrayInput.length == 1){
-        for (let i = 0; i < 2; i++){
-            A.innerHTML += `<tr>${array4[i]}</tr><br>`;
-            newArrayA.push(array4[i]);
+
+    for (let i = 0; i < arrayInput.length; i++){
+        if (termos.indexOf(arrayInput[i]) != -1){
+            quantiTermos++;
         }
-    }else if(arrayInput.length == 2){
+    }
+    
+    if (quantiTermos == 1){
+        for (let i = 0; i < 2; i++){
+            if (arrayInput[0] == '~'){
+                A.innerHTML += `<tr>${array4[i + 1]}</tr><br>`;
+                newArrayA.push(array4[i + 1]);
+            }else{
+                A.innerHTML += `<tr>${array4[i]}</tr><br>`;
+                newArrayA.push(array4[i]);
+            }
+        }
+    }else if(quantiTermos == 2){
         for (let i = 0; i < 4; i++){
             A.innerHTML += `<tr>${array3[i]}</tr><br>`;
             newArrayA.push(array3[i]);
@@ -138,7 +160,7 @@ function usinArray(){
             B.innerHTML += `<tr>${array4[i]}</tr><br>`;
             newArrayB.push(array4[i]);
         }
-    }else if(arrayInput.length == 3){
+    }else if(quantiTermos == 3){
         for (let i = 0; i < 8; i++){
             A.innerHTML += `<tr>${array2[i]}</tr><br>`;
             newArrayA.push(array2[i]);
@@ -151,7 +173,7 @@ function usinArray(){
             C.innerHTML += `<tr>${array4[i]}</tr><br>`;
             newArrayC.push(array4[i]);
         }
-    }else if(arrayInput.length == 4){
+    }else if(quantiTermos == 4){
         for (let i = 0; i < 16; i++){
             A.innerHTML += `<tr>${array1[i]}</tr><br>`;
             newArrayA.push(array1[i]);
@@ -169,16 +191,13 @@ function usinArray(){
             newArrayD.push(array4[i]);
         }
     }
-    console.log(newArrayA, newArrayB, newArrayC, newArrayD);
 }
-
 
 function calculateLogic(){
     for (let i = 0; i < arrayInput.length; i++){
         if (arrayInput[i] == 'v'){
             for (let j = 0; j < newArrayA.length; j++){
                 if (newArrayA[j] == 1 || newArrayB[j] == 1){
-                    console.log(199999);
                     resultArray.push(1);
                     Resultado.innerHTML += `<tr>${resultArray[j]}</tr><br>`;
                 }else{
@@ -190,39 +209,40 @@ function calculateLogic(){
             for (let j = 0; j < newArrayA.length; j++){
                 if (newArrayA[j] == 1 && newArrayB[j] == 1){
                     resultArray.push(1);
+                    Resultado.innerHTML += `<tr>${resultArray[j]}</tr><br>`;
                 }else{
                     resultArray.push(0);
+                    Resultado.innerHTML += `<tr>${resultArray[j]}</tr><br>`;
                 }
             }
         }else if (arrayInput[i] == '>'){
             for (let j = 0; j < newArrayA.length; j++){
                 if (newArrayA[j] == 1 && newArrayB[j] == 0){
                     resultArray.push(0);
+                    Resultado.innerHTML += `<tr>${resultArray[j]}</tr><br>`;
                 }else{
                     resultArray.push(1);
+                    Resultado.innerHTML += `<tr>${resultArray[j]}</tr><br>`;
                 }
             }
-        }else if (arrayInput[i] == '~'){
+        }else if (arrayInput[i] == '~' && arrayInput[i+1] == 'A' || arrayInput[i] == '~' && arrayInput[i+1] == 'B' || arrayInput[i] == '~' && arrayInput[i+1] == 'C' || arrayInput[i] == '~' && arrayInput[i+1] == 'D'){
             for (let j = 0; j < newArrayA.length; j++){
-                if (newArrayA[j] == 1){
-                    resultArray.push(0);
-                }else{
-                    resultArray.push(1);
+                    resultArray.push(newArrayA[j]);
+                    Resultado.innerHTML += `<tr>${resultArray[j]}</tr><br>`;
                 }
-            }
-        }else if (arrayInput[i] == '<>'){
+        }else if (arrayInput[i] == '↔'){
             for (let j = 0; j < newArrayA.length; j++){
                 if (newArrayA[j] == newArrayB[j]){
                     resultArray.push(1);
+                    Resultado.innerHTML += `<tr>${resultArray[j]}</tr><br>`;
                 }else{
                     resultArray.push(0);
+                    Resultado.innerHTML += `<tr>${resultArray[j]}</tr><br>`;
                 }
             }
         }
     }
 }
-
-
 
 function botao(){
     usinArray();
@@ -230,8 +250,6 @@ function botao(){
     console.log(arrayInput);
     console.log(resultArray)
 }
-
 </script>
-
 </body>
 </html>

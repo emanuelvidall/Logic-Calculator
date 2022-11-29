@@ -1,0 +1,24 @@
+body{
+    overflow-x: hidden;
+    background-color: whitesmoke;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    height: 100vh;
+}
+
+.fa-calculator{
+    margin-right: 2vw;
+}
+
+.button{
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
+
+body .input{
+    margin-top: 1vh;
+    width: 53vw;
+    margin-bottom: 2vh;
+}
