@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <script src="https://kit.fontawesome.com/026e4f1f21.js" crossorigin="anonymous"></script>
+    <title>Calculadora Logica Sobre</title>
+</head>
+<style>
+    body{
+    overflow-x: hidden;
+    background-color: whitesmoke;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    height: 100vh;
+}
+
+.fa-calculator{
+    margin-right: 2vw;
+}
+
+.button{
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
+
+body .input{
+    margin-top: 1vh;
+    width: 53vw;
+    margin-bottom: 2vh;
+}
+
+p, h, h1, h2, h3, h4 {
+    max-width: auto;
+    margin-left: 5vw;
+    margin-right: 5vw;
+}
+
+footer{
+    margin-top: 5vh;
+}
+
+#pythonimage{
+    max-width: 50vw;
+    text-align: center;
+    margin-left: 25vw;
+}
+
+h1{
+    margin-top: 2vh;
+}
+
+</style>
+<body>
+    <h1 class="title">Introdução</h1>
+        <h2>O cenário do trabalho proposto é que nós fomos contratados pela IBM para desenvolver um provador de fórmulas proposicionais, onde ficamos responsáveis pelo analisador léxico, sintático e o provador de tautologia.</h2><br>
+    <h1 class="title is-5">Analisador Léxico</h1>
+        <p>Verifica se os simbolos da proposição estão corretos.</p>
+    <h1 class="title is-5"> Analisador Sintático</h1>
+        <p>Identifica se sintaxe da fórmula atende aos requisitos de uma fórmula bem formulada.</p>
+    <h1 class="title is-5">Provador de Tautologia</h1>
+        <p>Testa e identifica quando houver uma tautologia.</p>
+    <h1 class="title">Metodologia</h1>
+        <p>Durante o estudo prévio para execução do trabalho notamos que existem diversas formas de desenvolver uma solução, e existem maneiras mais simples de se resolver, como a utilização de bibliotecas já prontas. A maneira que optamos foi desenvolver nosso próprio programa, a ponto de fixar e entender melhor a lógica proposicional.</p>
+        <h2>Python: Library TTG(Table-Truth-Generator)</h2>
+        <img id="pythonimage" src="/polacode/pythonexample.jpeg">
+    <h1 class="title">Resultados</h1>
+        <p>Nossa ferramenta consegue fazer a <strong>Análise Léxica e Sintática</strong> porém, como não conseguimos realizar operações mais complexas, não foi possível também fazer um <strong>Provador Tautológico</strong>, mas, que seria bem simples apenas verificando se todos os itens da array são <strong>1's(uns)</strong> ou <strong>True</strong></p><br>
+            <img src="/polacode/array.png" alt="array">
+            <img src="/polacode/arrayscriadas.png">
+            <img src="/polacode/wff.png">
+            <img src="/polacode/logicresult.png">
+            <br>
+    <h1 class="title">Conclusão</h1>
+        <h2>Nossa ferramenta foi capaz de realizar a análise Léxica e Sintática porém, com a complexidade do desenvolvimento em javascript, não foi possível realizar operações maiores do que as com 2 termos, pensamos em outras formas de abordar o problema, como arrays com True e False no lugar de 1 e 0 para apenas usar os operadores em javascript, e funções para condicional e bicondicional, e de maneira recursiva, gerar uma array de resultados a cada operação(uma letra com um operador, ou uma letra um operador e uma letra) e ir comparando com as demais arrays resultados já criadas, porém não conseguimos implementar. O Javascript é muito mais interessante para o desenvolvimento da lógica matemática, computacional e proposicional, já o <strong>Python</strong> é ideal para realizar o projeto sem mais complexidade, apenas focado no resultado das operações e no trabalho com grandes volumes de dados.</p></h2>
+<footer>
+    <p>Feito por <a href="https://github.com/emanuelvidall">Emanuel Vidal <i class="fa-brands fa-github"></i></a> e <a href="https://github.com/rafaelsaboia">Rafael Saboia <i class="fa-brands fa-github"></i></a></p>
+</footer>
+</body>
+</html>
