@@ -13,8 +13,10 @@
 <body>
 <div class="main-containerr">
     <h1 class="title is-1"><i class="fa-solid fa-calculator"></i>Calculadora Lógica</h1>
+    <button class="button is-success">Sobre</button><br>
     <input class="input is-primary" type="text" placeholder="digite a proposição lógica" id="proposicao"><br>
-    <button class="button is-success" onclick="botao()">console.log</button>
+    <button class="button is-success" onclick="botao()">Exibir</button>
+    <p><strong>Operadores</strong><br>Conjunção: <strong>^</strong><br> Condicional: <strong>></strong><br>Disjunção: <strong>v</strong><br>Bicondicional: <strong>↔</strong></p>
     <h3>Att. não usar a letrar 'v' como termo</h3>
 </div>
 <style type="text/css">
@@ -37,6 +39,10 @@ th{
     padding:10px 20px;
     word-break:normal;
     }
+
+footer{
+    margin-top: 55vh;
+}
 </style>
 
 <table class="tg table" style="margin-top: 2vh; margin-left: 2vw; margin-right: 2vw;">
@@ -59,6 +65,9 @@ th{
     </tr>
 </tbody>
 </table>
+<footer>
+    <p>Feito por <a href="https://github.com/emanuelvidall">Emanuel Vidal <i class="fa-brands fa-github"></i></a> e <a href="https://github.com/rafaelsaboia">Rafael Saboia <i class="fa-brands fa-github"></i></a></p>
+</footer>
 <script>
 var proposicao = document.getElementById("proposicao");
 var arrayInput = [];
