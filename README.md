@@ -2,7 +2,7 @@
 ## About The Project 📚
 
 This project was proposed by the teacher of Computational Mathematics course at University of Fortaleza (UNIFOR)
-You're requested to develop a propositional logic calculator, using the logical connectives and verifying for a WFF (well-formulated-formula), printing the results
+We've been requested to develop a propositional logic calculator, using the logical connectives and verifying for a WFF (well-formulated-formula), printing the results
 in the form of truth table.<br>
 Development in collaboration with [Rafael Saboia](https://github.com/rafaelsaboia)
 
